@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The crisis, explained — Chokepoint</title>
+<meta name="description" content="A sourced, even-handed briefing on the 2026 Strait of Hormuz crisis: what happened, what each side wants, and how India and the US have been affected.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-bottom:28px">
+    <p class="kicker">Briefing · updated 6 November 2026</p>
+    <h1 class="h-page">The Hormuz crisis, explained</h1>
+    <p class="dek">Eight months after the war began, the strait is neither fully shut nor open. Here is what happened, what each side wants, and who is paying for it.</p>
+  </section>
+
+  <section class="section cols" aria-labelledby="now-h">
+    <div class="col-main prose">
+      <h2 class="h-sec" id="now-h">Where things stand</h2>
+      <p>Ships are moving through Hormuz at roughly a fifth of their normal rate. Independent trackers counted about 12–17 crossings a day in late October, against 73–138 before the war depending on who is counting, and the UK’s maritime security agency put traffic about 70% below normal. Oil volumes have recovered more than ship numbers, because what does get through travels in large escorted tankers: the data firm Kpler estimated about 11.7 million barrels a day in October, against roughly 20 million before the war.</p>
+      <p>The two sides disagree about the order of things. According to Axios, the US wants nuclear concessions first; Iran wants the blockade lifted first. Talks mediated by Qatar continued in Doha into November.</p>
+      <p class="small">“Open” and “closed” are contested words here. Iran has declared the strait open or shut several times, and US official figures on traffic are often higher than independent tanker counts. This page uses “restricted” where the picture is mixed and labels claims as claims.</p>
+    </div>
+    <aside class="col-side col-rule">
+      <h3 class="h-sub">In numbers</h3>
+      <dl class="fact" style="display:grid;grid-template-columns:1fr auto;gap:10px 16px;margin:14px 0 0;font-size:14px">
+        <dt>Ships a day, late Oct</dt><dd class="num" style="margin:0">12–17</dd>
+        <dt>Oil through Hormuz, Oct</dt><dd class="num" style="margin:0">≈11.7 mb/d</dd>
+        <dt>Before the war</dt><dd class="num" style="margin:0">≈20 mb/d</dd>
+        <dt>War-risk insurance</dt><dd class="num" style="margin:0">0.25% → 3–10%</dd>
+        <dt>Gulf–Asia freight, Oct</dt><dd class="num" style="margin:0">&gt;5× pre-war</dd>
+      </dl>
+      <p class="source">S&amp;P Global, UKMTO, Kpler (via Reuters/CNBC), Marsh via The National, IEA.</p>
+    </aside>
+  </section>
+
+  <section class="section" aria-labelledby="tl-h">
+    <div class="cols">
+      <div class="col-main">
+        <h2 class="h-sec" id="tl-h">What happened, month by month</h2>
+        <ol class="timeline" id="tl" style="margin-top:20px"></ol>
+      </div>
+      <aside class="col-side col-rule">
+        <h3 class="h-sub">Watch it on the price</h3>
+        <p class="small">Every big move in oil followed news from the strait — and diplomacy moved prices as much as barrels did.</p>
+        <div class="chart" id="mini" style="margin-top:12px"></div>
+        <p class="source">Brent spot, EIA.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="who-h">
+    <h2 class="h-sec" id="who-h">Who wants what</h2>
+    <p class="dek" style="font-size:19px">Each side in its own terms, what gives it leverage, and what it is paying. None is presented as the default.</p>
+    <ul class="actors" id="actors" style="margin-top:18px"></ul>
+    <p class="note" style="margin-top:20px"><b>A note on words.</b> The US blockade applies to ships travelling to or from Iranian ports, not to the strait as a whole. Strike and mine claims from Iran and recovery claims from US officials are both reported here as claims.</p>
+  </section>
+
+  <section class="section" aria-labelledby="eff-h">
+    <h2 class="h-sec" id="eff-h">India is hit far harder than the US</h2>
+    <p class="dek" style="font-size:19px">India buys most of its oil from abroad, and much of it came through Hormuz. The US is a net energy exporter and feels the crisis mainly at the pump.</p>
+    <div class="scroll-x" style="margin-top:18px">
+      <table class="data" id="eff" style="min-width:680px"></table>
+    </div>
+    <p class="source">S&amp;P Global, ORF, EIA, AAA, Reuters, CNBC, Angel One, PSU Connect, Admirals, ICRA via Wikipedia. Some October figures for the rupee, RBI, US inflation and the S&amp;P 500 come from secondary sources and should be read as approximate.</p>
+    <p class="prose" style="font-size:17px;margin-top:18px">Not every fall is oil’s fault. Analysts also point to a weaker rupee, high US bond yields and worries about AI’s effect on Indian IT firms — which is partly why Wipro dropped out of the Nifty 50 in September.</p>
+  </section>
+</main>
+<footer id="foot"></footer>
+<script src="assets/vendor/d3.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/facts.js"></script>
+<script src="assets/js/chart.js"></script>
+<script>
+(async function () {
+  const F = CP_FACTS, C = CP;
+  document.getElementById('tl').innerHTML = F.timeline.map(([d, t, s]) => `<li><span class="d">${d}</span><p>${t} <span class="px">${s}</span></p></li>`).join('');
+  document.getElementById('actors').innerHTML = F.actors.map(a => `<li><div><h3>${a.name}</h3><p class="wants">Wants: ${a.wants}</p></div><div><p><b>Says</b>${a.says}</p><p><b>Leverage</b>${a.leverage}</p><p><b>Costs and critics</b>${a.cost}</p></div></li>`).join('');
+  document.getElementById('eff').innerHTML = `<thead><tr><th scope="col"></th><th scope="col">India</th><th scope="col">United States</th></tr></thead><tbody>${F.effects.map(([a, b, c]) => `<tr><th scope="row" style="font-weight:600;white-space:normal;border-bottom:1px solid var(--rule)">${a}</th><td>${b}</td><td>${c}</td></tr>`).join('')}</tbody>`;
+  const b = await C.json('data/brent.json');
+  BrentChart(document.getElementById('mini'), b.series, [], { from: '2026-01-15', height: 560, notes: [{ date: '2026-04-07', text: 'Peak {v}', dx: 8, dy: 4 }] });
+})();
+</script>
+</body>
+</html>

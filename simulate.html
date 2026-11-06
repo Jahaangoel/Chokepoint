@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Close a strait — Chokepoint</title>
+<meta name="description" content="Shut one of the world's oil chokepoints and see what a transparent model expects for oil prices, India's import bill, US petrol and 130 US and Indian stocks.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-bottom:20px">
+    <p class="kicker">Simulator</p>
+    <h1 class="h-page">What happens if a strait shuts?</h1>
+    <p class="dek">Pick a chokepoint, decide how badly it is blocked and for how long. The model starts from a normal world — Brent at $71, the price on the last day before the 2026 war — and works out the knock-on effects.</p>
+  </section>
+
+  <section class="cols" style="padding:8px 0 32px" aria-label="Scenario">
+    <div class="col-side" style="flex:1 1 280px;max-width:340px">
+      <h2 class="h-sub" id="pick-lbl" style="margin-bottom:12px">Choose a strait</h2>
+      <ul class="straits" id="strait-list" aria-labelledby="pick-lbl"></ul>
+      <div style="margin-top:22px">
+        <span class="lbl" id="sev-lbl">How badly is it blocked?</span>
+        <div class="seg" role="group" aria-labelledby="sev-lbl" id="sev"></div>
+      </div>
+      <div style="margin-top:18px">
+        <span class="lbl" id="dur-lbl">For how long?</span>
+        <div class="seg" role="group" aria-labelledby="dur-lbl" id="dur"></div>
+      </div>
+      <details class="how" style="margin-top:24px">
+        <summary>Change the model’s assumption</summary>
+        <div class="body">
+          <label class="lbl" for="k">Price response: Brent rises <span id="k-val" class="num"></span> for every 1% of world oil supply lost</label>
+          <input type="range" id="k" min="2" max="8" step="0.1">
+          <p class="small">The default, 4.6%, is what happened on average during the 2026 crisis. Push it up for a panicky market, down for one with plenty of spare oil. <a href="method.html#price">Why 4.6?</a></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="col-main">
+      <p class="verdict" id="verdict" aria-live="polite"></p>
+      <div class="map-wrap" id="map" style="margin-top:14px"></div>
+      <div class="legend" aria-hidden="true">
+        <span><svg width="34" height="8"><line x1="2" y1="4" x2="32" y2="4" stroke="#23405F" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0 5.5"/></svg>Normal route (dots are moving cargo)</span>
+        <span><svg width="34" height="8"><line x1="2" y1="4" x2="32" y2="4" stroke="#B3261E" stroke-width="1.8" stroke-dasharray="5 4"/></svg>Blocked</span>
+        <span><svg width="34" height="8"><line x1="2" y1="4" x2="32" y2="4" stroke="#A86A12" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0 5.5"/></svg>Detour or bypass</span>
+      </div>
+      <p class="small" id="why" style="margin:10px 0 0;max-width:70ch"></p>
+    </div>
+  </section>
+
+  <section class="section cols" aria-labelledby="chain-h">
+    <div class="col-main">
+      <h2 class="h-sec" id="chain-h">The chain reaction</h2>
+      <ol class="chain" id="chain"></ol>
+      <p class="source">Model: net oil supply lost ÷ world demand of 104 million barrels a day (IEA), times the price response. India’s bill assumes crude imports of 5 million barrels a day (S&amp;P Global). US petrol shows the crude cost only: a barrel holds 42 gallons.</p>
+    </div>
+    <aside class="col-side col-rule">
+      <h3 class="h-sub">Reality check</h3>
+      <div id="reality" class="prose" style="font-size:17px"></div>
+    </aside>
+  </section>
+
+  <section class="section" aria-labelledby="stocks-h">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
+      <div>
+        <h2 class="h-sec" id="stocks-h">Who wins, who loses</h2>
+        <p class="dek" style="font-size:18px;margin:0">Estimated move for each stock in this scenario, based on how it has actually moved with oil.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end">
+        <div>
+          <span class="lbl" id="win-lbl">Measure sensitivity using</span>
+          <div class="seg" role="group" aria-labelledby="win-lbl" id="win"></div>
+        </div>
+        <div>
+          <label class="lbl" for="q">Find a stock</label>
+          <input type="search" id="q" placeholder="e.g. IndiGo or XOM" style="width:200px">
+        </div>
+      </div>
+    </div>
+    <div id="status" style="margin:16px 0 0"></div>
+    <div class="cols" style="margin-top:20px;gap:28px" id="movers"></div>
+    <div class="tabs" role="tablist" style="margin-top:28px" id="tabs"></div>
+    <div class="scroll-x"><table class="data" id="tbl"></table></div>
+    <p style="margin:14px 0 0"><button type="button" class="btn ghost small" id="more">Show all stocks</button></p>
+    <details class="how" style="margin-top:24px">
+      <summary>How to read this table</summary>
+      <div class="body">
+        <p><b>Sensitivity</b> is how much the stock has tended to move for a 1% move in Brent. −0.40 means it usually falls about 0.4% when oil rises 1%. The grey range is a 95% confidence interval: if it crosses zero, the link is weak.</p>
+        <p><b>“2026 crisis”</b> uses daily prices since the war began. <b>“Normal times”</b> uses three years of weekly prices. A supply shock like Hormuz tends to hurt more than ordinary oil moves, so the crisis numbers are usually the better guide here.</p>
+        <p>Noisy estimates are pulled toward the average for their sector. Full details are on <a href="method.html">How it works</a>.</p>
+      </div>
+    </details>
+  </section>
+</main>
+<footer id="foot"></footer>
+<script src="assets/vendor/d3.min.js"></script>
+<script src="assets/vendor/topojson-client.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/geo.js"></script>
+<script src="assets/js/facts.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/model.js"></script>
+<script src="assets/js/simulate.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works — Chokepoint</title>
+<meta name="description" content="The formulas, data and sources behind Chokepoint, and the limits of the model.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.formula{font-family:var(--mono);font-size:15px;background:var(--paper-2);border-left:3px solid var(--ink);padding:12px 16px;margin:14px 0 18px;overflow-x:auto;white-space:pre}
+.toc-side{position:sticky;top:20px;font-size:14px}
+.toc-side a{display:block;padding:6px 0;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule)}
+.toc-side a:hover{color:var(--ink)}
+.refs{font-family:var(--sans);font-size:14px;line-height:1.55;padding-left:1.2em}
+.refs li{margin:0 0 8px}
+</style>
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-bottom:24px">
+    <p class="kicker">How it works</p>
+    <h1 class="h-page">The model, the data and the limits</h1>
+    <p class="dek">Chokepoint is a teaching model. Every number on the site comes from one of the formulas below, and every formula is simple enough to check with a calculator.</p>
+  </section>
+
+  <div class="cols" style="padding:28px 0 40px">
+    <nav class="col-side" aria-label="On this page" style="flex:0 1 220px;max-width:240px">
+      <div class="toc-side"><a href="#price">1. Oil price in a closure</a><a href="#stocks">2. How a stock reacts to oil</a><a href="#moves">3. From sensitivity to a move</a><a href="#score">4. The risk score</a><a href="#data">5. Data and updates</a><a href="#limits">6. What it can’t tell you</a><a href="#sources">7. Sources</a></div>
+    </nav>
+    <div class="col-main prose">
+      <h2 id="price">1. How much does oil rise when a strait closes?</h2>
+      <p>The simulator asks one question: <b>how much oil disappears from the world market?</b> Then it scales that by how sharply prices reacted in 2026.</p>
+      <div class="formula">Brent rise (%) = k × (oil supply lost ÷ world demand) × duration factor</div>
+      <p><b>Oil supply lost</b> depends on whether ships have another way round.</p>
+      <ul>
+        <li><b>Hormuz has no sea detour.</b> Lost supply = flow × share blocked − pipeline bypass. Flow is 20.9 million barrels a day (EIA, first half of 2025). The IEA estimates 3.5–5.5 mb/d of spare room in the Saudi and UAE bypass pipelines; the model uses the middle, 4.5.</li>
+        <li><b>The others have detours.</b> Oil still arrives, but later. For the first month, the model counts the delayed oil as missing: flow × share blocked × extra days ÷ 30. The EIA puts the Cape detour at about 15 extra days from the Arabian Sea to Europe. For Malacca (3 days via Lombok or Sunda) and Panama (12 days via the Cape), the extra days are the model’s own estimates.</li>
+      </ul>
+      <p><b>World demand</b> is 104 mb/d (IEA, first half of 2025). <b>Share blocked</b> is 30% for “disrupted”, 60% for “half shut” and 100% for “fully shut”.</p>
+      <p><b>k, the price response, is 4.6.</b> It comes from 2026 itself. From 2 March to early November, Brent spot averaged about 44.5% above its 27 February price of $71.32, while roughly 10 mb/d — about 9.6% of world demand — was cut off (the IEA said at least 10 mb/d was shut in by March; Kpler’s October estimate implies a similar gap). 44.5 ÷ 9.6 ≈ 4.6. You can change k on the simulator page.</p>
+      <p><b>Duration</b> scales the shock. For a true loss like Hormuz: one week × 0.5 (stocks cushion it), one month × 1, three months × 1.2 (stocks run down). For detours: one week × 0.5, one month × 1, three months × 0.7 (shipping adjusts). These factors are judgement calls, not measured values.</p>
+      <p><b>Check:</b> Hormuz fully shut for a month gives (20.9 − 4.5) ÷ 104 = 15.8% of supply, × 4.6 ≈ +72%, or about $123 a barrel. In reality, Brent spot peaked at $138 on 7 April and averaged about $103 — the strait was never 100% closed and governments released 400 million barrels of emergency stocks.</p>
+      <p>The knock-on numbers are plain arithmetic. India’s extra bill = 5 million barrels a day × price rise × 365 days. US petrol shows the crude cost only: price rise ÷ 42, because a barrel holds 42 gallons.</p>
+
+      <h2 id="stocks">2. How a stock reacts to oil</h2>
+      <p>Each night, Chokepoint downloads prices for about 130 shares and measures how each has moved with Brent crude. It uses two standard regressions:</p>
+      <div class="formula">Model A:  r_stock = a + b_mkt × r_market + b_oil × r_Brent
+Model B:  r_stock = c + B × r_Brent</div>
+      <p><b>Model A</b> separates the oil effect from the market’s own move (the Nifty 50 for Indian shares, the S&amp;P 500 for US ones). This two-factor “market and oil” model goes back to Faff and Brailsford and was extended to individual firms by Boyer and Filion and by Narayan and Sharma. <b>Model B</b> keeps the usual market knock-on, because when oil spikes the whole market tends to move too. B is the number the simulator uses.</p>
+      <p>Two windows are measured:</p>
+      <ul>
+        <li><b>Normal times:</b> weekly returns (Friday to Friday) over the last three years. Weekly data avoids a timing problem: the NSE closes hours before oil settles, which biases daily numbers.</li>
+        <li><b>2026 crisis:</b> daily returns since 2 March 2026, with yesterday’s oil move added as a second term to deal with the same timing gap. B = today’s oil coefficient + yesterday’s.</li>
+      </ul>
+      <p>Standard errors are Newey–West (they allow for patterns over time), and the site shows a 95% range for every estimate. Noisy estimates are pulled toward the average for their sector: shrunk B = w × B + (1 − w) × sector average, where w = τ² ÷ (τ² + SE²). A stock with a precise estimate keeps most of its own number; a noisy one moves toward its peers.</p>
+
+      <h2 id="moves">3. From sensitivity to an estimated move</h2>
+      <p>Because percentage changes compound, the simulator works in logs:</p>
+      <div class="formula">move = exp(B × ln(1 + oil rise)) − 1</div>
+      <p>Example: an airline with B = −0.30 facing a 50% oil rise. The naive answer is −15%; the correct one is exp(−0.30 × ln 1.5) − 1 ≈ −11.5%. The range shown uses B ± 1.96 standard errors.</p>
+
+      <h2 id="score">4. The Chokepoint Risk Score</h2>
+      <p>The score asks one fixed question: <b>if Brent jumped 50%, how much would this portfolio be expected to lose?</b> Each 2% of expected loss is one point, capped at 10. For each stock it uses the more painful of its two shrunk estimates, so it leans cautious. Labels: under 2 low, 2–4 moderate, 4–6.5 elevated, above 6.5 high. A portfolio expected to gain is labelled oil-hedged and scores 0.</p>
+      <p>The score is deliberately one-sided. A portfolio full of oil producers isn’t “risky” in a Hormuz crisis — it’s hedged — so the score doesn’t punish exposure in the helpful direction. The idea of fixed, documented buckets borrows from the EU’s 1–7 risk indicator for funds.</p>
+
+      <h2 id="data">5. Data and updates</h2>
+      <ul>
+        <li><b>Brent spot price:</b> U.S. Energy Information Administration (Europe Brent Spot Price FOB), via the open <a href="https://github.com/datasets/oil-prices">datasets/oil-prices</a> project. Spot prices are for physical cargoes and ran above futures during the crisis.</li>
+        <li><b>Share prices, Brent futures (BZ=F), indices and USD/INR:</b> Yahoo Finance via the open-source <i>yfinance</i> library, which is unofficial and sometimes rate-limited. The update tries several times; if it still fails, the site keeps the last good numbers and says they are out of date.</li>
+        <li><b>Schedule:</b> a GitHub Action runs every weekday morning, India time, after US markets close.</li>
+        <li><b>Stocks covered:</b> the Nifty 50 (after the September 2026 change, when BSE replaced Wipro), the 50 largest US companies, and about 30 extra names where oil matters most — refiners, airlines, shippers, cruise lines, paint and tyre makers.</li>
+        <li><b>Chokepoint facts:</b> EIA’s World Oil Transit Chokepoints (updated March 2026) and the IEA’s Strait of Hormuz factsheet (February 2026). 2026 events are from Reuters, CNBC, Al Jazeera, S&amp;P Global and others, listed on the briefing page.</li>
+      </ul>
+
+      <h2 id="limits">6. What it can’t tell you</h2>
+      <ul>
+        <li><b>The past is only a guide.</b> Sensitivities are measured on how shares <i>did</i> move. A new crisis can hit a company differently.</li>
+        <li><b>Supply shocks are different.</b> Kilian and Park found that oil rises driven by fear about supply hurt shares, while rises driven by strong demand often come with rising shares. A three-year average mixes both, so the “normal times” numbers probably understate the damage from a Hormuz-type event. That is why the simulator defaults to the 2026 crisis window.</li>
+        <li><b>Policy can override markets.</b> India’s state fuel retailers lose money when pump prices are held down; ONGC’s gains can be cut by windfall taxes. The model can’t predict those decisions.</li>
+        <li><b>One price for oil.</b> The model uses Brent. Gas, LPG and freight markets can move very differently — Qatar’s LNG mattered enormously in 2026.</li>
+        <li><b>Not investment advice.</b> Chokepoint is a learning tool built by a student. Don’t buy or sell anything because of it.</li>
+      </ul>
+
+      <h2 id="sources">7. Sources</h2>
+      <ol class="refs">
+        <li>U.S. Energy Information Administration, <a href="https://www.eia.gov/international/content/analysis/special_topics/World_Oil_Transit_Chokepoints">World Oil Transit Chokepoints</a>.</li>
+        <li>International Energy Agency, <a href="https://iea.blob.core.windows.net/assets/c8248eba-8689-46d9-ae4b-b858b59c0f1c/StraitofHormuz2026-Factsheet.pdf">Strait of Hormuz factsheet</a>, February 2026.</li>
+        <li>Faff, R. and Brailsford, T., <a href="https://researchportalplus.anu.edu.au/en/publications/a-test-of-a-two-factor-market-and-oil-pricing-model/">A test of a two-factor “market” and “oil” pricing model</a>.</li>
+        <li>Boyer, M. and Filion, D. (2007), <a href="https://ideas.repec.org/a/eee/eneeco/v29y2007i3p428-453.html">Common and fundamental factors in stock returns of Canadian oil and gas companies</a>, Energy Economics.</li>
+        <li>Narayan, P. and Sharma, S. (2011), <a href="https://ideas.repec.org:443/a/eee/jbfina/v35y2011i12p3253-3262.html">New evidence on oil price and firm returns</a>, Journal of Banking &amp; Finance.</li>
+        <li>Kilian, L. and Park, C. (2009), <a href="https://econpapers.repec.org/RePEc:ier:iecrev:v:50:y:2009:i:4:p:1267-1287">The impact of oil price shocks on the U.S. stock market</a>, International Economic Review.</li>
+        <li>Nandha, M. and Faff, R. (2008), <a href="https://ideas.repec.org/a/eee/eneeco/v30y2008i3p986-997.html">Does oil move equity prices? A global view</a>, Energy Economics.</li>
+        <li>Treanor, S. et al. (2014), <a href="https://econpapers.repec.org/RePEc:eee:finana:v:34:y:2014:i:c:p:200-211">Exposure, hedging, and value: new evidence from the U.S. airline industry</a>, International Review of Financial Analysis.</li>
+        <li>Mishra, S. and Mishra, S. (2021), <a href="https://researcher.manipal.edu/en/publications/are-indian-sectoral-indices-oil-shock-prone-an-empirical-evaluati/">Are Indian sectoral indices oil shock prone?</a></li>
+        <li>NSE research on stale prices in daily betas, <a href="https://nsearchives.nseindia.com/content/research/Paper7.pdf">NSE working paper</a>.</li>
+        <li>NSE Indices, <a href="https://niftyindices.com/Press_Release/ind_prs10082026.pdf">Nifty 50 change, 10 August 2026</a>.</li>
+        <li>Newey–West standard errors: <a href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.get_robustcov_results.html">statsmodels documentation</a>.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+<footer id="foot"></footer>
+<script src="assets/js/common.js"></script>
+</body>
+</html>

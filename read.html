@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read more — Chokepoint</title>
+<meta name="description" content="Articles and analysis on the 2026 Hormuz crisis, oil and markets.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-bottom:24px">
+    <p class="kicker">Read more</p>
+    <h1 class="h-page">Articles</h1>
+    <p class="dek">Longer pieces on the crisis, its politics and what it means for markets — written by Jahaan. Opinions in these articles are the author’s; the rest of the site sticks to sourced facts.</p>
+  </section>
+  <section style="padding:8px 0 40px">
+    <div id="filters" style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px"></div>
+    <ul class="toc" id="articles"></ul>
+  </section>
+  <section class="section" aria-labelledby="also-h" style="border-top:1px solid var(--rule)">
+    <h2 class="h-sub" id="also-h">Also on Chokepoint</h2>
+    <p class="prose" style="font-size:17px"><a href="briefing.html">The crisis, explained</a> — a sourced timeline, what each country wants, and how India and the US have been hit.</p>
+  </section>
+</main>
+<footer id="foot"></footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/articles.js"></script>
+<script>
+(async function () {
+  const el = document.getElementById('articles'), fl = document.getElementById('filters');
+  const all = await CPArticles.all();
+  const tags = [...new Set(all.map(a => a.tag).filter(Boolean))];
+  let cur = '';
+  function draw() {
+    const a = cur ? all.filter(x => x.tag === cur) : all;
+    el.innerHTML = a.length ? a.map(x => `<li><span class="d">${x.date ? CP.fmtDate(x.date) : ''}${x.tag ? '<br>' + CP.esc(x.tag) : ''}</span><a href="article.html?a=${encodeURIComponent(x.slug)}">${CP.esc(x.title)}</a>${x.dek ? `<p>${CP.esc(x.dek)}</p>` : ''}</li>`).join('') : '<li><p style="grid-column:1/-1;margin:0">No articles yet.</p></li>';
+    fl.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.t === cur));
+  }
+  if (tags.length > 1) {
+    fl.innerHTML = `<div class="seg" role="group" aria-label="Filter by topic"><button type="button" data-t="">All</button>${tags.map(t => `<button type="button" data-t="${CP.esc(t)}">${CP.esc(t)}</button>`).join('')}</div>`;
+    fl.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { cur = b.dataset.t; draw(); } });
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

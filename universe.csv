@@ -1,0 +1,130 @@
+ticker,name,market,list,sector,note
+ADANIENT.NS,Adani Enterprises,IN,Nifty 50,Metals & mining,"Coal trading, airports, new energy. Moderate link."
+ADANIPORTS.NS,Adani Ports & SEZ,IN,Nifty 50,Logistics & shipping,Port volumes include crude and coal cargo. Direct link.
+APOLLOHOSP.NS,Apollo Hospitals,IN,Nifty 50,Healthcare,Weak direct link.
+ASIANPAINT.NS,Asian Paints,IN,Nifty 50,Paints & chemicals,Crude-derived raw materials (solvents and monomers). Strong link.
+AXISBANK.NS,Axis Bank,IN,Nifty 50,Financials,Weak direct link (through rates and inflation).
+BAJAJ-AUTO.NS,Bajaj Auto,IN,Nifty 50,Autos,Fuel prices hit demand; big exporter. Moderate.
+BAJFINANCE.NS,Bajaj Finance,IN,Nifty 50,Financials,Weak direct link.
+BAJAJFINSV.NS,Bajaj Finserv,IN,Nifty 50,Financials,Weak direct link.
+BEL.NS,Bharat Electronics,IN,Nifty 50,Industrials & defence,Weak direct link; defence demand can rise in a conflict.
+BHARTIARTL.NS,Bharti Airtel,IN,Nifty 50,Telecom & media,Weak direct link.
+BSE.NS,BSE Ltd,IN,Nifty 50,Financials,Weak direct link; volatility can lift trading volumes.
+CIPLA.NS,Cipla,IN,Nifty 50,Healthcare,Weak direct link.
+COALINDIA.NS,Coal India,IN,Nifty 50,Energy producers,Energy substitute; diesel is an input. Possibly positive.
+DRREDDY.NS,Dr. Reddy's Laboratories,IN,Nifty 50,Healthcare,Weak direct link.
+EICHERMOT.NS,Eicher Motors,IN,Nifty 50,Autos,Fuel prices hit demand. Moderate.
+ETERNAL.NS,Eternal (Zomato),IN,Nifty 50,Consumer & retail,Delivery fleet runs on fuel. Moderate.
+GRASIM.NS,Grasim Industries,IN,Nifty 50,Paints & chemicals,Chemical feedstocks and energy. Moderate.
+HCLTECH.NS,HCLTech,IN,Nifty 50,Technology,Weak direct link.
+HDFCBANK.NS,HDFC Bank,IN,Nifty 50,Financials,Weak direct link.
+HDFCLIFE.NS,HDFC Life,IN,Nifty 50,Financials,Weak direct link.
+HINDALCO.NS,Hindalco Industries,IN,Nifty 50,Metals & mining,Energy-heavy smelting; freight. Moderate.
+HINDUNILVR.NS,Hindustan Unilever,IN,Nifty 50,Consumer staples,Crude-derived inputs (detergents and packaging). Moderate.
+ICICIBANK.NS,ICICI Bank,IN,Nifty 50,Financials,Weak direct link.
+INDIGO.NS,InterGlobe Aviation (IndiGo),IN,Nifty 50,Airlines,Jet fuel is its largest cost. Strong negative.
+INFY.NS,Infosys,IN,Nifty 50,Technology,Weak direct link.
+ITC.NS,ITC,IN,Nifty 50,Consumer staples,Weak direct link (packaging).
+JIOFIN.NS,Jio Financial Services,IN,Nifty 50,Financials,Weak direct link.
+JSWSTEEL.NS,JSW Steel,IN,Nifty 50,Metals & mining,Imports coking coal by sea. Moderate.
+KOTAKBANK.NS,Kotak Mahindra Bank,IN,Nifty 50,Financials,Weak direct link.
+LT.NS,Larsen & Toubro,IN,Nifty 50,Industrials & defence,Large Gulf project order book. Moderate.
+M&M.NS,Mahindra & Mahindra,IN,Nifty 50,Autos,Fuel prices hit demand. Moderate.
+MARUTI.NS,Maruti Suzuki,IN,Nifty 50,Autos,Fuel prices hit car demand. Moderate.
+MAXHEALTH.NS,Max Healthcare,IN,Nifty 50,Healthcare,Weak direct link.
+NESTLEIND.NS,Nestlé India,IN,Nifty 50,Consumer staples,Packaging and freight. Weak to moderate.
+NTPC.NS,NTPC,IN,Nifty 50,Power & utilities,Coal and gas-fired power; fuel costs mostly passed on.
+ONGC.NS,ONGC,IN,Nifty 50,Energy producers,"Upstream producer; positive, but windfall taxes can cap gains. Strong."
+POWERGRID.NS,Power Grid,IN,Nifty 50,Power & utilities,Weak direct link (regulated returns).
+RELIANCE.NS,Reliance Industries,IN,Nifty 50,Refiners & fuel retail,Refiner and petrochemicals; imports crude. Strong.
+SBILIFE.NS,SBI Life Insurance,IN,Nifty 50,Financials,Weak direct link.
+SHRIRAMFIN.NS,Shriram Finance,IN,Nifty 50,Financials,Lends to truck operators squeezed by diesel prices. Moderate.
+SBIN.NS,State Bank of India,IN,Nifty 50,Financials,Weak direct link.
+SUNPHARMA.NS,Sun Pharma,IN,Nifty 50,Healthcare,Weak direct link.
+TCS.NS,Tata Consultancy Services,IN,Nifty 50,Technology,Weak direct link.
+TATACONSUM.NS,Tata Consumer Products,IN,Nifty 50,Consumer staples,Packaging and freight. Weak.
+TMPV.NS,Tata Motors Passenger Vehicles,IN,Nifty 50,Autos,Fuel prices hit demand; JLR exports. Moderate.
+TATASTEEL.NS,Tata Steel,IN,Nifty 50,Metals & mining,Imports coking coal by sea. Moderate.
+TECHM.NS,Tech Mahindra,IN,Nifty 50,Technology,Weak direct link.
+TITAN.NS,Titan Company,IN,Nifty 50,Consumer & retail,Weak direct link (rupee and gold).
+TRENT.NS,Trent,IN,Nifty 50,Consumer & retail,Weak direct link.
+ULTRACEMCO.NS,UltraTech Cement,IN,Nifty 50,Cement & materials,Kiln fuel and diesel freight are big costs. Strong.
+HINDPETRO.NS,Hindustan Petroleum (HPCL),IN,Oil-sensitive extras,Refiners & fuel retail,Hit when pump prices are held down while crude rises.
+IOC.NS,Indian Oil Corporation,IN,Oil-sensitive extras,Refiners & fuel retail,Refiner and fuel retailer; same squeeze risk.
+BPCL.NS,Bharat Petroleum (BPCL),IN,Oil-sensitive extras,Refiners & fuel retail,Refiner and fuel retailer; left the Nifty 50 in 2025.
+OIL.NS,Oil India,IN,Oil-sensitive extras,Energy producers,Upstream producer. Positive.
+GAIL.NS,GAIL (India),IN,Oil-sensitive extras,Gas & LNG,Gas transmission and marketing. Mixed.
+PETRONET.NS,Petronet LNG,IN,Oil-sensitive extras,Gas & LNG,Imports Qatari LNG through Hormuz. Strong exposure.
+SCI.NS,Shipping Corporation of India,IN,Oil-sensitive extras,Logistics & shipping,Tanker and freight rates. Positive in rate spikes.
+GESHIP.NS,Great Eastern Shipping,IN,Oil-sensitive extras,Logistics & shipping,Tanker rates. Positive.
+MRF.NS,MRF,IN,Oil-sensitive extras,Paints & chemicals,Synthetic rubber and carbon black come from crude. Negative.
+APOLLOTYRE.NS,Apollo Tyres,IN,Oil-sensitive extras,Paints & chemicals,Crude-derived raw materials. Negative.
+PIDILITIND.NS,Pidilite Industries,IN,Oil-sensitive extras,Paints & chemicals,Crude-derived raw materials. Negative.
+TMCV.NS,Tata Motors Commercial Vehicles,IN,Oil-sensitive extras,Autos,Truck demand depends on fleet diesel costs. Moderate.
+NVDA,NVIDIA,US,US top 50,Technology,Weak direct link.
+GOOGL,Alphabet,US,US top 50,Telecom & media,Weak direct link.
+AAPL,Apple,US,US top 50,Technology,Asian supply chain; imports by sea. Modest.
+MSFT,Microsoft,US,US top 50,Technology,Weak direct link.
+AMZN,Amazon,US,US top 50,Consumer & retail,Delivery fleet and air cargo fuel. Moderate.
+AVGO,Broadcom,US,US top 50,Technology,Weak direct link.
+TSLA,Tesla,US,US top 50,Autos,High oil can lift electric-car demand.
+META,Meta Platforms,US,US top 50,Telecom & media,Weak direct link.
+WMT,Walmart,US,US top 50,Consumer & retail,Imports by sea; shoppers squeezed by fuel. Moderate.
+BRK-B,Berkshire Hathaway,US,US top 50,Financials,"Owns BNSF rail and stakes in Chevron and Occidental. Mixed."
+LLY,Eli Lilly,US,US top 50,Healthcare,Weak direct link.
+JPM,JPMorgan Chase,US,US top 50,Financials,Weak direct link.
+MU,Micron Technology,US,US top 50,Technology,Weak direct link.
+AMD,AMD,US,US top 50,Technology,Weak direct link.
+XOM,ExxonMobil,US,US top 50,Energy producers,Producer and refiner. Strong positive.
+V,Visa,US,US top 50,Financials,Weak direct link.
+INTC,Intel,US,US top 50,Technology,Weak direct link.
+JNJ,Johnson & Johnson,US,US top 50,Healthcare,Weak direct link.
+ORCL,Oracle,US,US top 50,Technology,Weak direct link.
+COST,Costco,US,US top 50,Consumer & retail,Imports by sea; sells petrol at its stores. Moderate.
+CSCO,Cisco,US,US top 50,Technology,Weak direct link.
+MA,Mastercard,US,US top 50,Financials,Weak direct link.
+CAT,Caterpillar,US,US top 50,Industrials & defence,Sells equipment to oil and gas producers. Moderate positive.
+CVX,Chevron,US,US top 50,Energy producers,Producer and refiner. Strong positive.
+ABBV,AbbVie,US,US top 50,Healthcare,Weak direct link.
+NFLX,Netflix,US,US top 50,Telecom & media,Weak direct link.
+BAC,Bank of America,US,US top 50,Financials,Weak direct link.
+LRCX,Lam Research,US,US top 50,Technology,Weak direct link.
+UNH,UnitedHealth,US,US top 50,Healthcare,Weak direct link.
+KO,Coca-Cola,US,US top 50,Consumer staples,Plastic bottles come from crude. Weak to moderate.
+AMAT,Applied Materials,US,US top 50,Technology,Weak direct link.
+PG,Procter & Gamble,US,US top 50,Consumer staples,Crude-derived inputs and freight. Moderate.
+PLTR,Palantir,US,US top 50,Technology,Weak direct link.
+MS,Morgan Stanley,US,US top 50,Financials,Weak direct link.
+GE,GE Aerospace,US,US top 50,Industrials & defence,Engine servicing tied to airline flying. Indirect.
+HD,Home Depot,US,US top 50,Consumer & retail,Imports by sea. Weak to moderate.
+GS,Goldman Sachs,US,US top 50,Financials,Weak (commodity trading).
+PM,Philip Morris International,US,US top 50,Consumer staples,Weak direct link.
+MRK,Merck,US,US top 50,Healthcare,Weak direct link.
+TXN,Texas Instruments,US,US top 50,Technology,Weak direct link.
+GEV,GE Vernova,US,US top 50,Industrials & defence,Gas-turbine demand tied to gas prices. Indirect.
+KLAC,KLA,US,US top 50,Technology,Weak direct link.
+RTX,RTX,US,US top 50,Industrials & defence,Airline servicing plus defence demand. Indirect.
+LIN,Linde,US,US top 50,Paints & chemicals,Natural gas is its key energy input. Moderate.
+WFC,Wells Fargo,US,US top 50,Financials,Weak direct link.
+QCOM,Qualcomm,US,US top 50,Technology,Weak direct link.
+C,Citigroup,US,US top 50,Financials,Weak direct link.
+AXP,American Express,US,US top 50,Financials,Travel spending. Weak.
+IBM,IBM,US,US top 50,Technology,Weak direct link.
+COP,ConocoPhillips,US,Oil-sensitive extras,Energy producers,Upstream producer. Strong positive.
+OXY,Occidental Petroleum,US,Oil-sensitive extras,Energy producers,Upstream producer. Strong positive.
+EOG,EOG Resources,US,Oil-sensitive extras,Energy producers,Upstream producer. Strong positive.
+SLB,SLB,US,Oil-sensitive extras,Energy producers,Oilfield services. Positive.
+MPC,Marathon Petroleum,US,Oil-sensitive extras,Refiners & fuel retail,Refiner; depends on refining margins.
+VLO,Valero Energy,US,Oil-sensitive extras,Refiners & fuel retail,Refiner; depends on refining margins.
+LNG,Cheniere Energy,US,Oil-sensitive extras,Gas & LNG,LNG exporter; gains if Qatari LNG is cut off.
+DAL,Delta Air Lines,US,Oil-sensitive extras,Airlines,Jet fuel is a top-two cost. Strong negative.
+UAL,United Airlines,US,Oil-sensitive extras,Airlines,Jet fuel. Strong negative.
+AAL,American Airlines,US,Oil-sensitive extras,Airlines,Jet fuel; high debt. Strong negative.
+LUV,Southwest Airlines,US,Oil-sensitive extras,Airlines,Jet fuel. Strong negative.
+FDX,FedEx,US,Oil-sensitive extras,Logistics & shipping,Jet fuel and diesel; surcharges offset part.
+UPS,UPS,US,Oil-sensitive extras,Logistics & shipping,Jet fuel and diesel; surcharges offset part.
+CCL,Carnival,US,Oil-sensitive extras,Consumer & retail,Ship fuel; Middle East itineraries. Strong negative.
+RCL,Royal Caribbean,US,Oil-sensitive extras,Consumer & retail,Ship fuel. Strong negative.
+INSW,International Seaways,US,Oil-sensitive extras,Logistics & shipping,Tanker rates spike in chokepoint crises. Positive.
+FRO,Frontline,US,Oil-sensitive extras,Logistics & shipping,Supertanker rates. Positive.
+DOW,Dow,US,Oil-sensitive extras,Paints & chemicals,Hydrocarbon feedstocks. Mixed.

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chokepoint — the world’s oil chokepoints and what they mean for your money</title>
+<meta name="description" content="An interactive atlas of the sea lanes that carry the world’s oil, built around the 2026 Strait of Hormuz crisis. Explore the map, close a strait, and test your portfolio.">
+<meta property="og:title" content="Chokepoint">
+<meta property="og:description" content="Where the world’s oil squeezes through — and what happens to markets when it can’t.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-top:36px">
+    <div class="cols" style="align-items:flex-end">
+      <div class="col-main">
+        <p class="kicker">The 2026 Hormuz crisis</p>
+        <h1 class="h-lead">A fifth of the world’s oil passes through one strait. Since February, it has barely been open.</h1>
+      </div>
+      <div class="col-side">
+        <p class="dek" style="margin:0 0 6px">Six sea lanes carry most of the oil that powers the world economy. This atlas shows where they are, what happens when one closes, and which shares in India and the US win or lose.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cols" style="padding:28px 0 40px" aria-label="Explore the chokepoints">
+    <div class="col-main">
+      <div class="map-wrap" id="map"></div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;margin-top:10px">
+        <p class="small" style="margin:0">Click a strait to zoom in. Dots move along each route; figures are oil flows before the war, in million barrels a day (EIA).</p>
+        <button type="button" class="btn ghost small" id="world" hidden>Back to the world</button>
+      </div>
+    </div>
+    <aside class="col-side col-rule fact" id="fact" aria-live="polite"></aside>
+  </section>
+
+  <section class="section" aria-labelledby="chart-h">
+    <div class="cols">
+      <div class="col-main">
+        <p class="kicker">The price of a closed strait</p>
+        <h2 class="h-sec" id="chart-h">Oil nearly doubled within six weeks, then swung with every ceasefire and attack</h2>
+        <div class="chart" id="chart" style="margin-top:14px"></div>
+        <p class="source">Line: Brent spot price, U.S. Energy Information Administration (updated nightly). Spot is the price of physical cargoes; during the crisis it ran above Brent futures, which peaked at about $126 on 30 April. Events: Reuters, CNBC, Al Jazeera, IEA.</p>
+      </div>
+      <aside class="col-side col-rule">
+        <h3 class="h-sub">What the numbers mark</h3>
+        <ol class="timeline" id="ev-list" style="margin-top:14px"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="use-h">
+    <h2 class="h-sec" id="use-h">Use it</h2>
+    <ul class="toc" style="margin-top:16px">
+      <li><span class="d">Simulator</span><a href="simulate.html">Close a strait and watch the chain reaction</a><p>Hormuz, Malacca, Bab-el-Mandeb, Suez or Panama: pick how badly and for how long, and see oil prices, India’s import bill, US petrol and 130 shares respond.</p></li>
+      <li><span class="d">Stress test</span><a href="portfolio.html">How exposed is your portfolio?</a><p>Add your stocks and get a Chokepoint Risk Score out of 10, plus a card to share.</p></li>
+      <li><span class="d">Briefing</span><a href="briefing.html">The crisis, explained</a><p>What happened, month by month; what each country wants; and how India and the US have been hit.</p></li>
+      <li><span class="d">Method</span><a href="method.html">How the numbers are made</a><p>The formulas, the data, the sources — and the limits of a model like this.</p></li>
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="read-h">
+    <h2 class="h-sec" id="read-h">Read more</h2>
+    <ul class="toc" id="articles" style="margin-top:16px"></ul>
+  </section>
+</main>
+<footer id="foot"></footer>
+<script src="assets/vendor/d3.min.js"></script>
+<script src="assets/vendor/topojson-client.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/geo.js"></script>
+<script src="assets/js/facts.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/model.js"></script>
+<script src="assets/js/chart.js"></script>
+<script src="assets/js/articles.js"></script>
+<script>
+(async function () {
+  const F = CP_FACTS, G = CP_GEO, M = CP_MODEL, C = CP;
+  const fact = document.getElementById('fact'), worldBtn = document.getElementById('world');
+  let zoomed = false;
+  function show(id) {
+    const s = G.straits[id], f = F.straits[id];
+    map.select(id);
+    fact.innerHTML = `<p class="kicker" style="margin-bottom:6px">${id === 'cape' ? 'The detour' : 'Chokepoint'}</p><h3>${s.name}</h3>
+<p>${f.lede}</p><dl>${f.stats.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>
+<p><b style="font-family:var(--sans);font-size:13px">For India:</b> ${f.india}</p>
+${M.STRAITS[id] ? `<p style="margin-top:16px"><a class="btn" href="simulate.html?s=${id}&sev=full&dur=1m">Simulate closing it</a></p>` : ''}`;
+  }
+  const map = new AtlasMap(document.getElementById('map'), {
+    onSelect: id => { show(id); map.zoomTo(id); zoomed = true; worldBtn.hidden = false; },
+  });
+  await map.load('data/countries-50m.json');
+  map.fitSmall();
+  map.setValues(Object.fromEntries(Object.keys(G.straits).map(id => [id, M.STRAITS[id] ? M.STRAITS[id].flow + ' mb/d' : '9.1 mb/d'])));
+  map.setScenario({ routes: { gulfIndia: 'slowed moving', gulfAsia: 'slowed moving', gulfEurope: 'slowed moving', yanbuOut: 'reroute moving', capeAsia: 'reroute moving' }, pipes: { eastWest: 'on', adcop: 'on' }, zones: ['hormuz'] });
+  show('hormuz');
+  worldBtn.addEventListener('click', () => { map.zoomTo(null); worldBtn.hidden = true; zoomed = false; });
+
+  const b = await C.json('data/brent.json');
+  BrentChart(document.getElementById('chart'), b.series, F.events, {
+    from: '2025-12-01',
+    notes: [{ date: '2026-02-27', text: '{v} the day before the war', dx: -10, dy: -14, anchor: 'end' },
+            { date: '2026-04-07', text: 'Spot peak {v}', dx: 8, dy: -6 },
+            { date: '2026-06-24', text: '{v} after the peace memorandum', dx: 0, dy: 22, anchor: 'middle' }],
+  });
+  document.getElementById('ev-list').innerHTML = F.events.map((e, i) => `<li><span class="d">${i + 1} · ${C.fmtDate(e.date, { day: 'numeric', month: 'short' })}</span><p>${e.short}</p></li>`).join('');
+  CPArticles.list(document.getElementById('articles'), 3);
+})();
+</script>
+</body>
+</html>

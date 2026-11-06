@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your portfolio — Chokepoint</title>
+<meta name="description" content="Enter your US or Indian stocks and see how exposed they are to an oil chokepoint closing.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header id="masthead"></header>
+<main id="main" class="wrap">
+  <section class="section" style="padding-bottom:24px">
+    <p class="kicker">Stress test</p>
+    <h1 class="h-page">How exposed is your portfolio?</h1>
+    <p class="dek">Add the stocks you own, or might own, and how much of your money is in each. Chokepoint checks how each one has moved with oil and tells you what a closure could do to the whole lot.</p>
+    <div id="status"></div>
+  </section>
+
+  <section class="cols" style="padding:28px 0 40px" aria-label="Holdings and results">
+    <div class="col-main">
+      <h2 class="h-sec">Your holdings</h2>
+      <form id="add" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:12px 0 6px" autocomplete="off">
+        <div style="flex:1 1 260px">
+          <label class="lbl" for="pick">Stock</label>
+          <input type="text" id="pick" list="universe" placeholder="Type a name or ticker, e.g. Reliance" style="width:100%">
+          <datalist id="universe"></datalist>
+        </div>
+        <div>
+          <label class="lbl" for="amt">Amount (any currency) or %</label>
+          <input type="number" id="amt" min="0" step="any" placeholder="e.g. 10000" style="width:170px">
+        </div>
+        <button class="btn" type="submit">Add</button>
+      </form>
+      <p class="small" id="add-msg" role="status" style="min-height:20px;margin:0 0 10px"></p>
+      <p class="small" style="margin:0 0 6px">Or start from an example:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px" id="presets"></div>
+      <div class="scroll-x"><table class="data" id="hold"></table></div>
+      <p class="small" style="margin-top:10px">Your list stays in this browser only. Nothing is sent anywhere.</p>
+    </div>
+
+    <aside class="col-side col-rule" aria-labelledby="score-h">
+      <h2 class="h-sub" id="score-h">Chokepoint Risk Score</h2>
+      <div id="score"></div>
+      <div style="margin-top:22px">
+        <label class="lbl" for="scen">Also show me this scenario</label>
+        <select id="scen" style="width:100%"></select>
+      </div>
+      <div id="scen-out" style="margin-top:14px"></div>
+      <details class="how" style="margin-top:22px">
+        <summary>What the score means</summary>
+        <div class="body">
+          <p>The score asks one fixed question: <b>if Brent jumped 50%, how much would this portfolio be expected to lose?</b> Each 2% of expected loss adds one point, up to 10.</p>
+          <p>For each stock it uses the more painful of two estimates — its behaviour in normal times and during the 2026 crisis — so the score leans cautious. A portfolio that would gain is labelled oil-hedged and scores 0.</p>
+        </div>
+      </details>
+    </aside>
+  </section>
+
+  <section class="section" aria-labelledby="share-h">
+    <div class="cols">
+      <div class="col-main">
+        <h2 class="h-sec" id="share-h">Share your result</h2>
+        <p class="dek" style="font-size:18px">A card sized for an Instagram story. It shows your score and biggest risks, not your amounts.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button class="btn" type="button" id="dl">Download the card</button>
+          <label class="small" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="showname"> Add my first name</label>
+          <input type="text" id="nm" placeholder="Your first name" style="width:160px" hidden>
+        </div>
+      </div>
+      <div class="col-side" style="max-width:300px">
+        <canvas id="card" width="1080" height="1920" style="width:100%;height:auto;border:1px solid var(--rule)" role="img" aria-label="Preview of the share card"></canvas>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="foot"></footer>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/geo.js"></script>
+<script src="assets/js/model.js"></script>
+<script src="assets/js/portfolio.js"></script>
+</body>
+</html>
